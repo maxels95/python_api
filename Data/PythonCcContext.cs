@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using python_api.Model;
 
-namespace python_api.Model;
+namespace python_api.Data;
 
 public partial class PythonCcContext : DbContext
 {
