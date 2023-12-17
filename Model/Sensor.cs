@@ -5,17 +5,17 @@ namespace python_api.Model;
 
 public partial class Sensor
 {
-    public long SensorId { get; set; }
+    public int SensorId { get; set; }
 
-    public long? SensorType { get; set; }
+    public int SensorType { get; set; }
 
-    public long? SensorPin { get; set; }
+    public int SensorPin { get; set; }
 
-    public long? SensorRelay { get; set; }
+    public int SensorRelay { get; set; }
 
-    public long? ControlMode { get; set; }
+    public int ControlMode { get; set; }
 
-    public long? RelayManualState { get; set; }
+    public int RelayManualState { get; set; }
 
     public virtual ICollection<Reading> Readings { get; } = new List<Reading>();
 }

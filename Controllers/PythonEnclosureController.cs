@@ -57,7 +57,8 @@ public class PythonEnclosureController : ControllerBase
 
         await _service.AddSensorAsync(sensor);
 
-        return CreatedAtAction("GetSensor", new { id = sensor.SensorId }, sensor);
+        // return CreatedAtAction("GetSensor", new { id = sensor.SensorId }, sensor);
+        return Ok();
     }
 
     [HttpPatch("update-relay-manual-state/{sensorId}")]
