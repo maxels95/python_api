@@ -37,35 +37,70 @@ public class PythonEnclosureController : ControllerBase
     [HttpPost("AddReading")]
     public async Task<IActionResult> InsertReadingAsync([FromBody] Reading reading)
     {
-       if (reading == null)
-        {
-            return BadRequest("Reading data is invalid.");
-        }
-
-        await _service.AddReadingAsync(reading);
-
-        return CreatedAtAction("GetReading", new { id = reading.ReadingId }, reading);
+       try
+       {
+            await _service.AddReadingAsync(reading);
+            return Ok();
+       }
+       catch
+       {
+            return BadRequest();
+       }
     }
 
     [HttpPost("AddSensor")]
     public async Task<IActionResult> InsertSensorAsync([FromBody] Sensor sensor)
     {
-         if (sensor == null)
-        {
-            return BadRequest("Sensor data is invalid.");
-        }
-
-        await _service.AddSensorAsync(sensor);
-
-        // return CreatedAtAction("GetSensor", new { id = sensor.SensorId }, sensor);
-        return Ok();
+        try
+       {
+            await _service.AddSensorAsync(sensor);
+            return Ok();
+       }
+       catch
+       {
+            return BadRequest();
+       }
     }
 
     [HttpPatch("update-relay-manual-state/{sensorId}")]
     public async Task<IActionResult> UpdateRelayManualStateAsync(int sensorId, [FromBody] int newRelayManualState)
     {
-        await _service.UpdateRelayManualStateAsync(sensorId, newRelayManualState);
+        try
+        {
+            await _service.UpdateRelayManualStateAsync(sensorId, newRelayManualState);
+            return Ok();
+        }
+        catch
+        {
+            return BadRequest();
+        }
+    }
 
-        return NoContent();
+    [HttpDelete("delete-reading")]
+    public async Task<IActionResult> DeleteEntityAsync([FromBody] Reading reading)
+    {
+        try
+        {
+            await _service.DeleteReadingAsync(reading);
+            return Ok("Reading removed.");
+        }
+        catch
+        {
+            return BadRequest();
+        }
+    }
+
+    [HttpDelete("delete-sensor")]
+    public async Task<IActionResult> DeleteEntityAsync([FromBody] Sensor sensor)
+    {
+        try
+        {
+            await _service.DeleteSensorAsync(sensor);
+            return Ok("Sensor removed.");
+        }
+        catch
+        {
+            return BadRequest();
+        }
     }
 }

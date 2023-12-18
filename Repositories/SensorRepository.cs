@@ -23,4 +23,9 @@ public class SensorRepository : Repository<Sensor>, ISensorRepository
         }
         // Handle when Sensor is null
     }
+
+    public async Task DeleteAsync(Sensor sensor)
+    {
+        await DeleteAsync(sensor);
+    }
 }

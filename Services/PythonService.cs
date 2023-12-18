@@ -32,4 +32,14 @@ public class PythonService
     {
         await _sensorRepository.UpdateRelayManualStateAsync(sensorId, newRelayManualState);
     }
+
+    public async Task DeleteReadingAsync(Reading reading)
+    {
+        await _readingRepository.DeleteAsync(reading);
+    }
+
+    public async Task DeleteSensorAsync(Sensor sensor)
+    {
+        await _sensorRepository.DeleteAsync(sensor);
+    }
 }

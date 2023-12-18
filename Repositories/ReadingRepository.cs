@@ -12,4 +12,9 @@ public class ReadingRepository : Repository<Reading>, IReadingRepository
     {
         await AddAsync(reading);
     }
+
+    public async Task DeleteAsync(Reading reading)
+    {
+        await DeleteAsync(reading);
+    }
 }
