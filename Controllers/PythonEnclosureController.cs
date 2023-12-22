@@ -1,6 +1,8 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using python_api.Data;
+using python_api.DTO;
 using python_api.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +15,13 @@ namespace python_api.Controllers;
 public class PythonEnclosureController : ControllerBase
 {
     private readonly PythonService _service;
+    private readonly IMapper _mapper;
     private readonly ILogger<PythonEnclosureController> _logger;
 
-    public PythonEnclosureController(PythonService service, ILogger<PythonEnclosureController> logger)
+    public PythonEnclosureController(PythonService service, IMapper mapper, ILogger<PythonEnclosureController> logger)
     {
         _service = service;
+        _mapper = mapper;
         _logger = logger;
     }
 
@@ -31,15 +35,17 @@ public class PythonEnclosureController : ControllerBase
             return NotFound();
         }
 
-        return Ok(readings);
+        var destinationObjects = _mapper.Map<IEnumerable<ReadingDTO>>(readings);
+        return Ok(destinationObjects);
     }
 
     [HttpPost("AddReading")]
-    public async Task<IActionResult> InsertReadingAsync([FromBody] Reading reading)
+    public async Task<IActionResult> InsertReadingAsync([FromBody] ReadingDTO readingDTO)
     {
        try
        {
-            await _service.AddReadingAsync(reading);
+            var destinationReading = _mapper.Map<Reading>(readingDTO);
+            await _service.AddReadingAsync(destinationReading);
             return Ok();
        }
        catch
@@ -49,11 +55,12 @@ public class PythonEnclosureController : ControllerBase
     }
 
     [HttpPost("AddSensor")]
-    public async Task<IActionResult> InsertSensorAsync([FromBody] Sensor sensor)
+    public async Task<IActionResult> InsertSensorAsync([FromBody] SensorDTO sensorDTO)
     {
         try
        {
-            await _service.AddSensorAsync(sensor);
+            var destinationSensor = _mapper.Map<Sensor>(sensorDTO);
+            await _service.AddSensorAsync(destinationSensor);
             return Ok();
        }
        catch

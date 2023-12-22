@@ -66,3 +66,5 @@
 /home/mikael/Desktop/Projects/PythonCC/API/python_api/obj/Debug/net7.0/python_api.pdb
 /home/mikael/Desktop/Projects/PythonCC/API/python_api/obj/Debug/net7.0/python_api.genruntimeconfig.cache
 /home/mikael/Desktop/Projects/PythonCC/API/python_api/obj/Debug/net7.0/ref/python_api.dll
+/home/mikael/Desktop/Projects/PythonCC/API/python_api/bin/Debug/net7.0/AutoMapper.dll
+/home/mikael/Desktop/Projects/PythonCC/API/python_api/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
