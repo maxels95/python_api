@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using python_api.Data;
 using python_api.DTO;
@@ -40,16 +41,21 @@ public class PythonEnclosureController : ControllerBase
     }
 
     [HttpPost("AddReading")]
-    public async Task<IActionResult> InsertReadingAsync([FromBody] ReadingDTO readingDTO)
+    public async Task<IActionResult> InsertReadingAsync([FromBody] Reading reading)
     {
        try
        {
-            var destinationReading = _mapper.Map<Reading>(readingDTO);
-            await _service.AddReadingAsync(destinationReading);
+            var newReading = new Reading {
+                Value = reading.Value,
+                SensorID = reading.SensorID,
+                DateTime = DateTime.Now.ToString()
+            };
+            await _service.AddReadingAsync(newReading);
             return Ok();
        }
-       catch
+       catch (SqliteException ex)
        {
+            Console.WriteLine($"SQLite Error {ex.SqliteErrorCode}: {ex.Message}");
             return BadRequest();
        }
     }

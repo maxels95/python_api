@@ -5,7 +5,7 @@ namespace python_api.Model;
 
 public partial class Sensor
 {
-    public int SensorId { get; set; }
+    public int SensorID { get; set; }
 
     public int SensorType { get; set; }
 

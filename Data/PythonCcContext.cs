@@ -29,25 +29,25 @@ public partial class PythonCcContext : DbContext
     {
         modelBuilder.Entity<Reading>(entity =>
         {
-            entity.Property(e => e.ReadingId)
-                .ValueGeneratedNever()
+            entity.Property(e => e.ReadingID)
+                .ValueGeneratedOnAdd()
                 .HasColumnName("ReadingID");
-            entity.Property(e => e.SensorId).HasColumnName("SensorID");
+            entity.Property(e => e.SensorID).HasColumnName("SensorID");
 
-            entity.HasOne(d => d.Sensor).WithMany(p => p.Readings).HasForeignKey(d => d.SensorId);
+            entity.HasOne(d => d.Sensor).WithMany(p => p.Readings).HasForeignKey(d => d.SensorID);
         });
 
         modelBuilder.Entity<Sensor>(entity =>
         {
-            entity.Property(e => e.SensorId)
-                .ValueGeneratedNever()
+            entity.Property(e => e.SensorID)
+                .ValueGeneratedOnAdd()
                 .HasColumnName("SensorID");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
             entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("UserID");
         });
 
